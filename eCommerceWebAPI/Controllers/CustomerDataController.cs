@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using eCommerceWebAPI.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceWebAPI.Controllers
 {
@@ -7,19 +9,18 @@ namespace eCommerceWebAPI.Controllers
     [ApiController]
     public class CustomerDataController : ControllerBase
     {
+        private readonly DataContext _datacontext;
+
+        public CustomerDataController(DataContext context )
+        {
+            _datacontext = context;
+        }
+
         [HttpGet]
 
         public async Task<ActionResult<List<CustomerData>>> GetCustomerData()
         {
-            return new List<CustomerData>
-            {
-                new CustomerData
-                {
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Email = "jDoe69@gmail.com"
-                }
-            };
+            return Ok(await _datacontext.Customers.ToListAsync());
         }
     }
 }
