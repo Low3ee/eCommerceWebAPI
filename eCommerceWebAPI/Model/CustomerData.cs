@@ -1,4 +1,4 @@
-﻿namespace eCommerceWebAPI
+﻿namespace eCommerceWebAPI.Model
 {
     public class CustomerData
     {
